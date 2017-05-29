@@ -3,17 +3,17 @@ if &cp | set nocp | endif
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
-cd ~/exercism/clojure
+cd ~/exercism
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +5 hello-world/src/hello_world.clj
-badd +1 bob/src/bob.clj
-badd +264 ~/.vimrc
+badd +8 java/pangram/src/main/java/PangramChecker.java
+badd +1 java/pangram/src/main/java
+badd +1 java/pangram/build.gradle
 argglobal
 silent! argdel *
-edit bob/src/bob.clj
+edit java/pangram/src/main/java/PangramChecker.java
 set splitbelow splitright
 wincmd t
 set winminheight=1 winheight=1 winminwidth=1 winwidth=1
@@ -26,20 +26,19 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=8
 setlocal fen
-14
+6
 normal! zo
-15
+7
 normal! zo
-15
+10
 normal! zo
-20
-normal! zo
-let s:l = 17 - ((16 * winheight(0) + 24) / 48)
+let s:l = 13 - ((12 * winheight(0) + 24) / 48)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-17
+13
 normal! 0
+lcd ~/exercism/java/pangram
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf

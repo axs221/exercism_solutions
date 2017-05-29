@@ -8,9 +8,14 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +8 java/pangram/src/main/java/PangramChecker.java
-badd +1 java/pangram/src/main/java
+badd +13 java/pangram/src/main/java/PangramChecker.java
 badd +1 java/pangram/build.gradle
+badd +19 java/hamming/src/main/java/Hamming.java
+badd +40 java/hamming/README.md
+badd +115 ~/.vimrc
+badd +18 java/hamming/src/test/java/HammingTest.java
+badd +1 ~/
+badd +1 java/hamming/src/main/java
 argglobal
 silent! argdel *
 edit java/pangram/src/main/java/PangramChecker.java
@@ -32,13 +37,13 @@ normal! zo
 normal! zo
 10
 normal! zo
-let s:l = 13 - ((12 * winheight(0) + 24) / 48)
+let s:l = 3 - ((2 * winheight(0) + 24) / 48)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-13
+3
 normal! 0
-lcd ~/exercism/java/pangram
+lcd ~/exercism/java/hamming
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf

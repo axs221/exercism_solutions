@@ -16,19 +16,13 @@ public class Hamming {
     }
 
     int getHammingDistance() {
-        char[] leftChars = left.toCharArray();
-        char[] rightChars = right.toCharArray();
-
-        int distance = IntStream.range(0, leftChars.length)
+        return IntStream
+            .range(0, left.length())
             .reduce(0, (p, i) -> {
-                if (leftChars[i] == rightChars[i]) {
+                if (left.charAt(i) == right.charAt(i))
                     return p;
-                }
-
                 return p += 1;
             });
-
-        return distance;
     }
 
 }

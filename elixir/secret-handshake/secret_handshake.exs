@@ -8,26 +8,24 @@ defmodule SecretHandshake do
     %{ command: "jump", b: 0b01000 }
   ]
 
-  @doc """
-  Determine the actions of a secret handshake based on the binary
-  representation of the given `code`.
+  defp get_command_names c do
+    Enum.map(c, fn c -> c.command end)
+  end
 
-  If the following bits are set, include the corresponding action in your list
-  of commands, in order from lowest to highest.
+  defp only_those_within_code commands, code do
+    Enum.filter(commands, fn c -> (c.b &&& code) != 0 end)
+  end
 
-  1 = wink
-  10 = double blink
-  100 = close your eyes
-  1000 = jump
+  defp reverse_if_code_given commands, code do
+    if (code &&& 0b10000) != 0, do: Enum.reverse(commands), else: commands
+  end
 
-  10000 = Reverse the order of the operations in the secret handshake
-  """
   @spec commands(code :: integer) :: list(String.t())
   def commands(code) do
     @commands
-      |> Enum.filter(fn c -> (c.b &&& code) != 0 end)
-      |> Enum.map(fn(c) -> c.command end)
-      |> (fn c -> if (code &&& 0b10000) != 0, do: Enum.reverse(c), else: c end).()
+      |> only_those_within_code(code)
+      |> get_command_names
+      |> reverse_if_code_given(code)
   end
 end
 

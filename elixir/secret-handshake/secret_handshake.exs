@@ -1,6 +1,13 @@
 use Bitwise
 
 defmodule SecretHandshake do
+  @commands [
+    %{ command: "wink", b: 0b00001 },
+    %{ command: "double blink", b: 0b00010 },
+    %{ command: "close your eyes", b: 0b00100 },
+    %{ command: "jump", b: 0b01000 }
+  ]
+
   @doc """
   Determine the actions of a secret handshake based on the binary
   representation of the given `code`.
@@ -17,16 +24,11 @@ defmodule SecretHandshake do
   """
   @spec commands(code :: integer) :: list(String.t())
   def commands(code) do
-    coms = [
-      %{ command: "wink", b: 0b00001 },
-      %{ command: "double blink", b: 0b00010 },
-      %{ command: "close your eyes", b: 0b00100 },
-      %{ command: "jump", b: 0b01000 }
-    ]
-
-    fc = Enum.filter(coms, fn(c) -> (c.b &&& code) != 0 end)
-    fc = Enum.map(fc, fn(c) -> c.command end)
-
-    if (code &&& 0b10000) != 0, do: Enum.reverse(fc), else: fc
+    @commands
+      |> Enum.filter(fn c -> (c.b &&& code) != 0 end)
+      |> Enum.map(fn(c) -> c.command end)
+      |> (fn c -> if (code &&& 0b10000) != 0, do: Enum.reverse(c), else: c end).()
   end
 end
+
+IO.inspect SecretHandshake.commands(0b11010)

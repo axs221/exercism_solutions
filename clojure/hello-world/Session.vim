@@ -26,12 +26,12 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=8
 setlocal fen
-let s:l = 5 - ((4 * winheight(0) + 24) / 48)
+let s:l = 5 - ((4 * winheight(0) + 17) / 35)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 5
-normal! 045|
+normal! 038|
 lcd ~/exercism/clojure/hello-world
 tabnext 1
 if exists('s:wipebuf')

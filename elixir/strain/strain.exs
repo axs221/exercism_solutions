@@ -1,7 +1,5 @@
 defmodule Strain do
-  defp filter([], _) do
-    []
-  end
+  defp filter([], _), do: []
 
   defp filter([head | tail], fun) do
     result = if fun.(head), do: [ head ], else: []
@@ -30,5 +28,3 @@ defmodule Strain do
     filter(list, &( !fun.(&1) ))
   end
 end
-
-IO.inspect Strain.keep([1, 2, 3], &(Integer.mod(&1, 2) == 0))

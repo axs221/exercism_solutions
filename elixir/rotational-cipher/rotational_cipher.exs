@@ -29,7 +29,7 @@ defmodule RotationalCipher do
   def rotate(text, shift) do
     text
       |> to_charlist
-      |> Enum.map(fn char -> rot(char, shift) end)
-      |> Enum.reduce("", fn phrase, acc -> acc <> phrase end)
+      |> Enum.map(&rot(&1, shift))
+      |> Enum.reduce("", &(&2 <> &1))
   end
 end
